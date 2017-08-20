@@ -1,0 +1,24 @@
+{
+  "name": "js_game",
+  "version": "1.0.0",
+  "description": "- learn from [link](https://github.com/guaxiao/gua.game.js/commit/aa2661005f2849ac74d4e87bd94a7e9d5a46319c)",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/holynova/js_game.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/holynova/js_game/issues"
+  },
+  "homepage": "https://github.com/holynova/js_game#readme",
+  "devDependencies": {
+    "eslint-config-airbnb-base": "^11.3.1",
+    "eslint-plugin-import": "^2.7.0"
+  }
+}
