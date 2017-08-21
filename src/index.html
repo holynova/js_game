@@ -6,9 +6,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <style>
-    #canvas {
-      /* width: 400px; */
-      /* height: 300px; */
+    #id-canvas {
       border: 1px solid black;
     }
   </style>
@@ -21,110 +19,11 @@
 </head>
 
 <body>
-  <canvas id="canvas" width="800" height="600"></canvas>
-  <input type="range" id="range">
-
-  <script>
-    var paused = false
-    var debugMode = true
-    var __main = function () {
-      var game = Game()
-      var paddle = Paddle()
-      var ball = Ball()
-      var secondBall = Ball(300, 500)
-      // var block = Block([0, 0, 1])
-      var blocks = loadLevel(4)
-      log(blocks)
-
-      game.registerAction('a', paddle.moveLeft)
-      game.registerAction('d', paddle.moveRight)
-      game.registerAction('f', function () {
-        ball.fire()
-        secondBall.fire()
-      })
-
-
-
-      game.update = function () {
-        if (paused) {
-          return
-        }
-        ball.move()
-        secondBall.move()
-        if (paddle.collide(ball)) {
-          ball.speedY *= -1
-        }
-        // if (paddle.collide(secondBall)) {
-        //   secondBall.speedY *= -1
-        // }
-
-        updateBlocks(blocks)
-
-
-      }
-      game.draw = function () {
-        game.drawImage(paddle)
-        game.drawImage(ball)
-        // game.drawImage(secondBall)
-        // game.drawImage(block)
-        drawBlocks(blocks)
-      }
-
-      var drawBlocks = function (blocks) {
-        for (var i = 0; i < blocks.length; i++) {
-          var block = blocks[i]
-          if (block.alive) {
-            game.drawImage(block)
-          }
-        }
-      }
-      var updateBlocks = function (blocks) {
-        for (var i = 0; i < blocks.length; i++) {
-          var block = blocks[i]
-          if (block.alive) {
-            if (block.collide(ball)) {
-              ball.bounce()
-              block.hurt()
-            }
-          }
-          // log('updateBlocks block', block)
-        }
-      }
-
-
-
-      document.addEventListener('keyup', function (event) {
-        // log(event.key)
-        if (event.key === 'p') {
-          paused = !paused
-        }
-      }, false)
-
-      // // var paddle = n
-      // window.addEventListener('load', function () {
-      //   log(paddle)
-      //   context.drawImage(paddle.image, paddle.x, paddle.y)
-      // }, false)
-
-
-
-      // var draw = function () {
-      //   context.clearRect(0, 0, canvas.width, canvas.height)
-      //   context.drawImage(paddle.image, paddle.x, paddle.y)
-      // }
-      // setInterval(function () {
-      //   if (leftDown) {
-      //     paddle.x -= paddle.speed
-      //   }
-      //   if (rightDown) {
-      //     paddle.x += paddle.speed
-      //   }
-      //   draw()
-      // }, 1000 / 30)
-
-    }
-    __main()
-  </script>
+  <canvas id="id-canvas" width="800" height="600"></canvas>
+  <div>
+    fps <input type="range" id="id-range">
+  </div>
+  <script src="./main.js"></script>
 </body>
 
 </html>

@@ -4,8 +4,8 @@ var Game = function (fps = 60) {
     keydowns: {},
     fps: fps,
   }
-  o.canvas = document.querySelector('#canvas')
-  o.context = canvas.getContext('2d')
+  o.canvas = document.querySelector('#id-canvas')
+  o.context = o.canvas.getContext('2d')
 
   o.registerAction = function (key, callback) {
     o.actions[key] = callback
@@ -28,7 +28,11 @@ var Game = function (fps = 60) {
   o.update = function () {
     log('Game.update')
   }
-  setInterval(function () {
+  o.setFps = function (fps) {
+    o.fps = fps
+  }
+
+  o.frame = function () {
     var keys = Object.keys(o.actions)
     for (let i = 0; i < keys.length; i += 1) {
       var key = keys[i]
@@ -38,10 +42,17 @@ var Game = function (fps = 60) {
     }
     o.update()
     // clear canvas
-    o.context.clearRect(0, 0, canvas.width, canvas.height)
+    o.context.clearRect(0, 0, o.canvas.width, o.canvas.height)
     // draw image
     o.draw()
-  }, 1000 / o.fps)
+  }
+  var runOnce = function () {
+    setTimeout(function () {
+      o.frame()
+      runOnce()
+    }, 1000 / o.fps)
+  }
+  runOnce()
 
   return o
 }
