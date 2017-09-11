@@ -4,6 +4,7 @@ const enableDebugMode = (enable) => {
       const key = event.key;
       if (key === 'p') {
         window.paused = !window.paused;
+        log('paused', window.paused)
       }
       // if ('1234'.includes(key)) {
       //   blocks = loadLevel(key);
@@ -102,13 +103,17 @@ function main() {
     paddle: './img/paddle.png',
     block: './img/block.png',
   };
+  enableDebugMode(true);
   // 创建game实例
   const game = Game.instance(30, images, (g) => {
     const startSence = StartSence.instance(g);
-    // log('startSence', startSence.draw);
-    // log('g', g);
+    // // log('startSence', startSence.draw);
+    // log('g.sence', g.sence);
+    // log('fps=', window.fps)
     g.runWithSence(startSence);
+    // log(startSence)
+    // const mainSence = MainSence.instance(g);
+    // g.runWithSence(mainSence)
   });
-  enableDebugMode();
 }
 main();

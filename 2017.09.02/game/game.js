@@ -94,10 +94,13 @@ class Game {
   }
   draw() {
     // log('draw sence', this.sence);
-    this.sence.draw();
+    this.sence.draw && this.sence.draw();
   }
   update() {
-    this.sence.update();
+    if (!window.paused) {
+
+      this.sence.update && this.sence.update();
+    }
   }
   clear() {
     this.context.clearRect(0, 0, this.canvas.width, this.canvas.height);
@@ -119,7 +122,7 @@ class Game {
     this.draw();
 
     // 一帧
-    setInterval(() => {
+    setTimeout(() => {
       this.runLoop();
     }, 1000 / window.fps);
   }
@@ -142,12 +145,15 @@ class Game {
   // 场景相关
   runWithSence(sence) {
     this.sence = sence;
+    // if (!window.paused) {
     setTimeout(() => {
       this.runLoop();
     }, 1000 / window.fps);
+    // }
   }
   replaceSence(sence) {
     this.sence = sence;
+    // log('this.sence = ', this.sence)
   }
   start() {
     this.runCallback(this);
